@@ -130,6 +130,7 @@ impl<R: Read + Write + Unpin> ImapStream<R> {
     ) -> io::Result<DecodeResult> {
         log::trace!("decode: input: {:?}", std::str::from_utf8(&buf[start..end]));
 
+        println!("DECODING: {:?}", std::str::from_utf8(&buf[start..end]));
         let mut rest = None;
         let mut used = 0;
         let res = ResponseData::try_new(buf, |buf| {
@@ -210,7 +211,7 @@ impl<R: Read + Write + Unpin> Stream for ImapStream<R> {
 
         let mut iter = 0;
         loop {
-            println!("ITERATION {}", iter);
+            println!("{:?} ITERATION {}", ::std::thread::current().id(), iter);
             iter += 1;
             assert!(iter < 100);
 

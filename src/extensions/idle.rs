@@ -116,7 +116,10 @@ impl<T: Read + Write + Unpin + fmt::Debug> Handle<T> {
         let fut = async move {
             while let Some(resp) = interruptible_stream.next().await {
                 let resp = resp?;
-                match resp.parsed() {
+                println!("PARSING STARTS");
+                let parsed = resp.parsed();
+                println!("PARSING FINISHED");
+                match parsed {
                     Response::Data { status, .. } if status == &Status::Ok => {
                         // all good continue
                     }
