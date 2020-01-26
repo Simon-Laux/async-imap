@@ -237,6 +237,7 @@ impl<R: Read + Write + Unpin> Stream for ImapStream<R> {
 
                     std::mem::replace(&mut this.buffer, buffer);
                     this.current = n;
+                    println!("ITERATION {} returns PENDING", iter);
                     return Poll::Pending;
                 }
             };
