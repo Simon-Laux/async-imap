@@ -208,7 +208,11 @@ impl<R: Read + Write + Unpin> Stream for ImapStream<R> {
             buffer
         };
 
+        let mut iter = 0;
         loop {
+            iter += 1;
+            assert!(iter < 100);
+
             if (n.end - n.start) + this.decode_needs >= buffer.capacity() {
                 if buffer.capacity() + this.decode_needs < MAX_CAPACITY {
                     buffer.realloc(buffer.capacity() + this.decode_needs);
