@@ -226,6 +226,7 @@ impl<R: Read + Write + Unpin> Stream for ImapStream<R> {
                     ))));
                 }
             }
+            println!("ITERATION {} (step 2)", iter);
 
             let bytes_read = match Pin::new(&mut this.inner).poll_read(cx, &mut buffer[n.end..]) {
                 Poll::Ready(result) => result?,
@@ -240,6 +241,7 @@ impl<R: Read + Write + Unpin> Stream for ImapStream<R> {
                 }
             };
             n.end += bytes_read;
+            println!("ITERATION {} (step 3)", iter);
 
             match this.decode(buffer, n.start, n.end)? {
                 DecodeResult::Some {
@@ -278,6 +280,7 @@ impl<R: Read + Write + Unpin> Stream for ImapStream<R> {
                     }
                 }
             }
+            println!("ITERATION {} (END)", iter);
         }
     }
 }
