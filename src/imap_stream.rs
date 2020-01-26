@@ -210,6 +210,7 @@ impl<R: Read + Write + Unpin> Stream for ImapStream<R> {
 
         let mut iter = 0;
         loop {
+            println!("ITERATION {}", iter);
             iter += 1;
             assert!(iter < 100);
 
