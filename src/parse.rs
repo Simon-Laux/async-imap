@@ -281,7 +281,10 @@ pub(crate) async fn handle_unilateral(
     res: ResponseData,
     unsolicited: sync::Sender<UnsolicitedResponse>,
 ) {
-    match res.parsed() {
+    println!("handle_unilateral started");
+    let parsed = res.parsed();
+    println!("handle_unilateral parsing finished");
+    match parsed {
         Response::MailboxData(MailboxDatum::Status { mailbox, status }) => {
             unsolicited
                 .send(UnsolicitedResponse::Status {
