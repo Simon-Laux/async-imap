@@ -133,6 +133,7 @@ impl<T: Read + Write + Unpin + fmt::Debug> Handle<T> {
                 }
             }
 
+            println!("MANUAL INTERRUPT ON THREAD {:?}", ::std::thread::current().id());
             Ok(IdleResponse::ManualInterrupt)
         };
 
