@@ -247,7 +247,7 @@ impl<R: Read + Write + Unpin> Stream for ImapStream<R> {
 
             println!("DECODING STARTS");
             let decoded = this.decode(buffer, n.start, n.end)?;
-            println!("DECODING FINISHED");
+            println!("DECODING FINISHED: {:?}", decoded);
             match decoded {
                 DecodeResult::Some {
                     response,
